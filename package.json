@@ -1,0 +1,25 @@
+{
+  "name": "real-time-scheduling",
+  "description": "",
+  "version": "",
+  "contributors": [
+    {
+      "name": "Vaibhav Rathore",
+      "email": "vaibhav@coloredcow.in"
+    },
+    {
+      "name": "Nishanth KD",
+      "email": "kd@coloredcow.in"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coloredcow/real-time-scheduling/"
+  },
+  "devDependencies": {
+    "http": "0.0.0",
+    "socket.io": "^1.4.6",
+    "socketio-auth": "0.0.5"
+  }
+}
