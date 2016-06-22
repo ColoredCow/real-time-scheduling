@@ -1,10 +1,33 @@
-var http =  require ("http");
+var app = require('http').createServer(handler)
+var io = require('socket.io')(app);
+var fs = require('fs');
 
-http.createServer(function (request, response) {
+app.listen(80);
+
+function handler (req, res) {
+
+	fs.readFile(__dirname + '/socket.html', 
+			function (err, data) {
+
+				if(err){
+					res.writeHead(500);
+					return res.end('Internal Server Error 500');
+				}
+
+				res.writeHead(200);
+				res.end(data);
+
+			});
+
+}
+
+io.on('connection', function (socket){
 	
-	response.writeHead(200, {'Content-Type': 'text/plain'});
-	response.end('Hello World\n');
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		
+		console.log(data);
 
-}).listen(5080);
+	});
 
-console.log('Server running at http://127.0.0.1:5080/');
+});
