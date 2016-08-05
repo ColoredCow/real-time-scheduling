@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-xs-offset-8 col-xs-4">
+		<button class="btn btn-danger" ng-click="logout()">Logout</button>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<h1>Hi {{ activeuser.username }}</h1>
+	</div>
+</div>
+
+<p>ADDRESS: {{ activeuser.address }}</p>
+
+<h3>Available Time Slots</h3>
+
+<div class="row" ui-view>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-6">
+		<button class="btn btn-info" ng-click="addslot()">ADD SLOT</button>
+	</div>
+</div>
+
+<div class="row addslot" style="display:none;">
+	<div class="col-xs-12">
+		<!-- <label>Name<input type="text" maxlength="20"></label>
+		<label>Phone<input type="text" maxlength="10"></label> -->
+		<label>DAY:
+			<select name="days" ng-model="addday">
+				<option value="Monday">Monday</option>
+				<option value="Tuesday">Tuesday</option>
+				<option value="Wednesday">Wednesday</option>
+				<option value="Thursday">Thursday</option>
+				<option value="Friday">Friday</option>
+				<option value="Saturday">Saturday</option>
+			</select>
+		</label>
+		<label>SLOT:
+			<select name="timeslots" ng-model="addtime">
+				<option value="09-10">09-10</option>
+				<option value="10-11">10-11</option>
+				<option value="11-12">11-12</option>
+				<option value="12-13">12-13</option>
+				<option value="13-14">13-14</option>
+				<option value="14-15">14-15</option>
+				<option value="15-16">15-16</option>
+				<option value="16-17">16-17</option>
+			</select>
+		</label>
+		<button class="btn btn-primary" ng-click="updateinfo()">Update</button>
+	</div>
+</div>
+<style>
+	body {
+	    	text-align: center;
+	}
+    .timeslot {
+    	min-width:60px;
+    }
+</style>

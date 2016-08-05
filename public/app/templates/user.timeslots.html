@@ -1,0 +1,11 @@
+<div ng-repeat="(day,times) in activeuser.timeslots" class="col-xs-12 col-sm-2">
+	<div>{{ day }}</div>
+	<div ng-repeat="time in times | orderBy">
+	    <button class="timeslot btn btn-primary" ng-click="removeslot(day,times.indexOf(time))">
+	    	{{ time }}
+	    </button>
+	    <br>
+	    <br>
+	    </div>
+	<br>     
+</div>

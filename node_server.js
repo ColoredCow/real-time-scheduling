@@ -1,33 +1,41 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
+// "use strict";
+
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var session = require('express-session');
 var fs = require('fs');
-
-app.listen(8081);
-
-function handler (req, res) {
-
-	fs.readFile(__dirname + '/socket.html', 
-			function (err, data) {
-
-				if(err){
-					res.writeHead(500);
-					return res.end('Internal Server Error 500');
-				}
-
-				res.writeHead(200);
-				res.end(data);
-
-			});
-
-}
-
-io.on('connection', function (socket){
-	
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
-		
-		console.log(data);
-
-	});
-
+const PORT = 8081;
+const server = app.listen(PORT, function() {
+	console.log("node server started on http://localhost:"+PORT);
 });
+
+const io = require('socket.io')(server);
+
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}))
+app.use(session({
+	resave: true,
+	secret: '123123',
+	saveUninitialized: true,
+}));
+
+io.on('connection', function(socket) {
+	console.log("you are online");
+	// var userdata = JSON.parse(fs.readFileSync(__dirname + '/public/json/data/datavaibhav.json'));
+	// socket.emit('sync timeslots', userdata);
+	// socket.emit('sync timeslots schedule', userdata);
+
+	socket.on('disconnect', function() {
+		console.log('you are currently offline');
+	});
+	socket.on('message', function(message) {
+		console.log('received message:',message);
+	});
+});
+
+// calling routes for asynchronous calls
+require('./routes.js')(app, fs, io);

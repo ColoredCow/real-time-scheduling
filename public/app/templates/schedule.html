@@ -1,0 +1,14 @@
+<div class="row">
+	<div ng-repeat="(day,times) in activeuser.timeslots" class="col-xs-12 col-sm-2">
+		<div>{{ day }}</div>
+		<div ng-repeat="time in times | orderBy">
+		    <button class="timeslot btn btn-info" ng-click="scheduleslot(day,time)">
+		    	{{ time }}
+		    </button>
+		    <br>
+		    <br>
+		    </div>
+		<br>     
+	</div>
+	
+</div>
